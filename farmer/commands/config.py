@@ -61,6 +61,8 @@ def cli(ctx):
         config = load_config()
     except TypeError:
         initialize_config()
+    finally:
+        config = load_config()
 
     if not config.get(config, 'token'):
         initialize_config()
