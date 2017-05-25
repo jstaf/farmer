@@ -17,6 +17,7 @@ setup(
     install_requires=[
         'click==6.6',
         'layeredconfig==0.3.2',
+        'pykwalify==1.6.0',
         'requests==2.11.1',
         'ruamel.yaml==0.13.7',
         'six==1.10.0',
@@ -31,6 +32,7 @@ setup(
             'config = farmer.commands.config:cli',
             'deploy = farmer.commands.deploy:cli',
             'help = farmer.commands.help:cli',
+            'validate = farmer.commands.validate:cli',
             'version = farmer.commands.version:cli',
         ],
     },

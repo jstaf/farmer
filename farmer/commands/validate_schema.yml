@@ -1,0 +1,16 @@
+map:
+  regex;(build|after_release|before_release):
+    seq:
+      - map:
+          commands:
+            seq:
+            - type: str
+  release_per_server:
+    seq:
+      - map:
+          commands:
+            seq:
+              - type: str
+          roles:
+            seq:
+              - type: str
