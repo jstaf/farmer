@@ -23,11 +23,12 @@ def cli(app, environment, open_deploy):
     config = load_config()
     try:
         client = VMFarmsAPIClient.from_config(config)
-        deploy_url = client.url_for('builds', 'deploys')
         application_list = client.get('applications')['results']
         selected_application = next(application for application in application_list if application['name'] == app)
         assert environment in selected_application['environments'], 'Invalid environment specified.'
-        client.post('applications/{application_id}/builds'.format(**selected_application), data={'environment': environment})
+        response = client.post('applications/{application_id}/builds'.format(**selected_application), data={'environment': environment})
+        build_id = response['id']
+        deploy_url = client.url_for('builds', 'deploys', build_id)
     except AssertionError as exc:
         output.die(str(exc))
     except StopIteration:

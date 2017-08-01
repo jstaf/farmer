@@ -58,7 +58,7 @@ class VMFarmsAPIClient(object):
         """
         Construct a version-appropriate API URL for the given path.
         """
-        path = list(path)
+        path = [str(item) for item in path]
         # Empty string ensures trailing slash.
         path.append('')
         return urljoin(self.url, '/'.join(path))
