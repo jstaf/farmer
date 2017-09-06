@@ -46,9 +46,9 @@ def initialize_config():
     mkdir_p(DEFAULT_CONFIG_DIR)
     config_filename = os.path.join(DEFAULT_CONFIG_DIR, 'farmer.yml')
     with open(config_filename, 'w') as config_file:
-        config_file.write(ruamel.yaml.dump({'token': token},
-                                           default_flow_style=False,
-                                           allow_unicode=True))
+        config_file.write(ruamel.yaml.safe_dump({'token': token},
+                                                default_flow_style=False,
+                                                allow_unicode=True))
 
 
 @click.group(invoke_without_command=True)
