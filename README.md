@@ -12,7 +12,7 @@ pip install farmer
 
 ## Configuration
 
-You need to provide Farmer with your VM Farms API token.
+You need to provide Farmer with your VM Farms API token. You can retrieve your API token from the [API documentation section](https://my.vmfarms.com/api/) of the VM Farms portal.
 
 Run `farmer config` to set your token for the first time:
 
@@ -25,8 +25,6 @@ If you need to change your token for any reason, you can use `farmer config set 
 ```
 farmer config set token c422b5e2230d617d22759a19a5a5cb65792edebc
 ```
-
-Don't have a token? Contact [VM Farms support](mailto:support@vmfarms.com).
 
 ## Usage
 
