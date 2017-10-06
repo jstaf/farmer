@@ -39,7 +39,7 @@ class RoundTripYAMLFile(DictSource):
             self.source = {}
         else:
             with codecs.open(yaml_filename, encoding='utf-8') as yaml_file:
-                self.source = ruamel.yaml.round_trip_load(yaml_file.read())
+                self.source = ruamel.yaml.round_trip_load(yaml_file.read()) or {}
         self.yaml_filename = yaml_filename
         self.dirty = False
         self.writable = writable
