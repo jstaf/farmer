@@ -6,7 +6,7 @@ from setuptools import (
 
 setup(
     name='farmer',
-    version='2.1.0',
+    version='2.1.1',
     author='VM Farms Inc.',
     author_email='support@vmfarms.com',
     url='https://github.com/vmfarms/farmer/',
