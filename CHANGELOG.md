@@ -1,6 +1,10 @@
 # farmer change log
 
-## Unreleased
+## 2.3.0 (2018-01-04)
+
+### Added
+
+* Accept configuration from environment variables (`FARMER_<key>`).
 
 ### Changed
 
