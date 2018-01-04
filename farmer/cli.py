@@ -5,6 +5,8 @@ This module provides the main entry point.
 import click
 import stevedore
 
+from farmer.version import print_package_versions
+
 
 class FarmerAliasedGroup(click.Group):
     """
@@ -95,8 +97,22 @@ def aliases(aliases, **attrs):
     return decorator
 
 
+def show_version(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    print_package_versions()
+    ctx.exit()
+
+
 @click.group(cls=FarmerCLI)
-@click.version_option()
+@click.option(
+    '--version',
+    callback=show_version,
+    expose_value=False,
+    help='Show the version and exit.',
+    is_eager=True,
+    is_flag=True,
+)
 @click.pass_context
 # Common kwargs (e.g., debug) are passed in by FarmerCLI.
 def cli(ctx, **kwargs):

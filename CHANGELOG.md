@@ -1,5 +1,11 @@
 # farmer change log
 
+## Unreleased
+
+### Changed
+
+* Unite `--version` and `version` output.
+
 ## 2.2.0 (2017-10-11)
 
 ### Added
