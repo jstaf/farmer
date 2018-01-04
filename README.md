@@ -26,6 +26,12 @@ If you need to change your token for any reason, you can use `farmer config set 
 farmer config set token c422b5e2230d617d22759a19a5a5cb65792edebc
 ```
 
+You can also set the token using the `FARMER_TOKEN` environment variable:
+
+```
+FARMER_TOKEN=c422b5e2230d617d22759a19a5a5cb65792edebc farmer apps
+```
+
 ## Usage
 
 ### `farmer apps`

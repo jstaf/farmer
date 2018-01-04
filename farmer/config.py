@@ -4,6 +4,7 @@ import os
 import click
 from layeredconfig import (
     Defaults,
+    Environment,
     DictSource,
     LayeredConfig,
 )
@@ -65,4 +66,8 @@ def load_config():
         if os.path.exists(path):
             config_file = path
             break
-    return LayeredConfig(Defaults(DEFAULTS), RoundTripYAMLFile(config_file))
+    return LayeredConfig(
+        Defaults(DEFAULTS),
+        RoundTripYAMLFile(config_file),
+        Environment(prefix='FARMER_', sectionsep='__'),
+    )
