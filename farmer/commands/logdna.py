@@ -1,7 +1,5 @@
-import datetime
-
 import click
-import dateutil.parser
+import dateparser
 import requests
 import sh
 
@@ -9,14 +7,11 @@ from farmer.config import load_config
 from farmer.logdna import LogDNAClient
 
 
-NOW = datetime.datetime.utcnow()
-YESTERDAY = NOW - datetime.timedelta(days=1)
-
-
 def parse_datetime(ctx, param, value):
-    if isinstance(value, datetime.datetime):
-        return value
-    return dateutil.parser.parse(value)
+    parsed_datetime = dateparser.parse(value)
+    if not parsed_datetime:
+        raise click.ClickException('Could not parse `{}` as datetime: {}'.format('/'.join(param.opts), value))
+    return parsed_datetime
 
 
 @click.group()
@@ -50,16 +45,18 @@ def config(ctx):
 @click.option(
     '-f', '--from', 'from_datetime',
     callback=parse_datetime,
-    default=YESTERDAY,
-    help='Start time for logs to export. Default: 1 day ago.',
+    default='1 day ago',
+    help='Start time for logs to export. Supports human readable dates.',
     metavar='DATETIME',
+    show_default=True,
 )
 @click.option(
     '-t', '--to', 'to_datetime',
     callback=parse_datetime,
-    default=NOW,
-    help='End time for logs to export. Default: now.',
+    default='now',
+    help='End time for logs to export. Supports human readable dates.',
     metavar='DATETIME',
+    show_default=True,
 )
 @click.option(
     '-n', '--num', 'size',

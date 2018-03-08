@@ -16,8 +16,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         'click==6.6',
+        'dateparser',
         'layeredconfig==0.3.2',
-        'python-dateutil',
         'pytz',
         'requests==2.11.1',
         'ruamel.yaml==0.13.7',
