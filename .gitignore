@@ -4,6 +4,8 @@
 .cache
 .coverage
 .farmer.yml
+.pytest_cache/
+.tox/
 build/
 coverage.xml
 dist/
