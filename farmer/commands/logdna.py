@@ -14,6 +14,21 @@ def parse_datetime(ctx, param, value):
     return parsed_datetime
 
 
+def prompt_logdna_service_key():
+    """
+    Prompt the user to create a service key.
+    """
+    # `config` and `export` both call this code. It is easier to test it as an
+    # isolated function.
+    config = load_config()
+    click.echo('Farmer will prompt you to enter your LogDNA service key.')
+    click.echo('If you have not created a service key yet, go to:\n\n    <https://app.logdna.com/manage/profile>\n')
+    logdna_service_key = click.prompt('Enter your LogDNA service key')
+    if config.get(config, 'logdna_service_key'):
+        click.confirm('You have already configured Farmer with a LogDNA service key. Overwrite it?', abort=True)
+    return logdna_service_key
+
+
 @click.group()
 @click.pass_context
 def cli(ctx):
@@ -32,12 +47,7 @@ def config(ctx):
 
         <https://app.logdna.com/manage/profile>
     """
-    config = load_config()
-    click.echo('Farmer will prompt you to enter your LogDNA service key.')
-    click.echo('If you have not created a service key yet, go to:\n\n    <https://app.logdna.com/manage/profile>\n')
-    logdna_service_key = click.prompt('Enter your LogDNA service key')
-    if config.get(config, 'logdna_service_key'):
-        click.confirm('You have already configured Farmer with a LogDNA service key. Overwrite it?', abort=True)
+    logdna_service_key = prompt_logdna_service_key()
     sh.farmer.config.set('logdna_service_key', logdna_service_key)
 
 
@@ -108,11 +118,7 @@ def export(ctx, from_datetime, to_datetime, size, hosts, apps, levels, query, pr
     user_config = load_config()
     logdna_service_key = user_config.get(user_config, 'logdna_service_key')
     if not logdna_service_key:
-        # Prompt user to set up key.
-        ctx.invoke(config)
-        # Reload key from configuration.
-        user_config = load_config()
-        logdna_service_key = user_config.get(user_config, 'logdna_service_key')
+        logdna_service_key = prompt_logdna_service_key()
 
     logdna = LogDNAClient(logdna_service_key)
     try:

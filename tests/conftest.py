@@ -8,3 +8,9 @@ def logdna_client(mocker):
     # Patch the session to mock all network I/O.
     mocker.patch.object(logdna, '_session', autospec=True)
     return logdna
+
+
+@pytest.fixture
+def click_cli_runner():
+    from click.testing import CliRunner
+    return CliRunner()
