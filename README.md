@@ -1,5 +1,7 @@
 # Farmer
 
+[![Build Status](https://travis-ci.org/vmfarms/farmer.svg?branch=master)](https://travis-ci.org/vmfarms/farmer)
+
 Use `farmer` to deploy your applications on [VM Farms](https://vmfarms.com/).
 
 ## Installation
