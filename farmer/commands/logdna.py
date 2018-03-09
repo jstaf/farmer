@@ -126,9 +126,9 @@ def export(ctx, from_datetime, to_datetime, size, hosts, apps, levels, query, pr
             from_datetime=from_datetime,
             to_datetime=to_datetime,
             size=size,
-            hosts=','.join(hosts),
-            apps=','.join(apps),
-            levels=','.join(levels),
+            hosts=','.join(hosts) if hosts else None,
+            apps=','.join(apps) if apps else None,
+            levels=','.join(levels) if levels else None,
             query=query,
             prefer=prefer
         )

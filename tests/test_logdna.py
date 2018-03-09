@@ -38,7 +38,7 @@ def test_epoch_tz_naive(mocker):
 
 
 class TestLogDNAClient(object):
-    @pytest.mark.parametrize('kwargs,payload', [
+    @pytest.mark.parametrize('export_kwargs,payload', [
         (
             {
                 'size': 10,
@@ -57,7 +57,6 @@ class TestLogDNAClient(object):
             {
                 'size': 0,
                 'levels': None,
-                'prefer': '',
             },
             {
                 'from': 2147483647,
@@ -66,7 +65,7 @@ class TestLogDNAClient(object):
             },
         ),
     ])
-    def test_export_url_params(self, mocker, logdna_client, kwargs, payload):
+    def test_export_url_params(self, mocker, logdna_client, export_kwargs, payload):
         """
         Should remove invalid URL parameters.
         """
@@ -75,5 +74,5 @@ class TestLogDNAClient(object):
 
         now = datetime.datetime.now()
         yesterday = now - datetime.timedelta(days=1)
-        logdna_client.export(yesterday, now, **kwargs)
+        logdna_client.export(yesterday, now, **export_kwargs)
         logdna_client._session.get.assert_called_once_with('https://api.logdna.com/v1/export', params=payload)

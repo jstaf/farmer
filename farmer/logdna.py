@@ -56,8 +56,7 @@ class LogDNAClient(object):
         """
         url = urljoin(self._base_url, 'export')
         # Omit empty query parameters.
-        payload = {key: value for key, value in params.items()
-                   if value is not None and value != ''}
+        payload = {key: value for key, value in params.items() if value is not None}
         payload.update({
             'from': epoch(from_datetime),
             'to': epoch(to_datetime),
