@@ -1,3 +1,5 @@
+import datetime
+
 import dateparser
 import freezegun
 import pytest
@@ -160,13 +162,13 @@ class TestLogDNAExportCommand(object):
         assert not result.exception
         self.logdna_client.export.assert_called_once_with(
             from_datetime=dateparser.parse(from_datetime),
-            to_datetime=mocker.ANY,
-            size=mocker.ANY,
-            hosts=mocker.ANY,
-            apps=mocker.ANY,
-            levels=mocker.ANY,
-            query=mocker.ANY,
-            prefer=mocker.ANY,
+            to_datetime=dateparser.parse('now'),
+            size=None,
+            hosts=None,
+            apps=None,
+            levels=None,
+            query=None,
+            prefer='tail',
         )
 
     @pytest.mark.parametrize('from_datetime', [
