@@ -52,7 +52,41 @@ Run `farmer deploy` to deploy an application:
 farmer deploy api api-prod
 ```
 
+### `farmer logdna`
+
+Export logs from [LogDNA](https://logdna.com/) in [JSONLines format](http://jsonlines.org/).
+
+First, generate a [service key](https://app.logdna.com/manage/profile) and configure Farmer:
+
+```
+farmer logdna config
+```
+
+To export logs, run `farmer logdna export`.
+You can filter results by application, host, log level, or a custom search query.
+
+```
+# Export all PostgreSQL logs from the past week.
+farmer logdna export --from 'last week' --app postgres
+
+# Export deploy logs from today.
+farmer logdna export --app deploy
+```
+
+The `-f`/`--from` and `-t`/`--to` options support human readable dates like "1 hour ago", "30 minutes ago", "yesterday", etc.
+Refer to the [dateparser documentation](https://dateparser.readthedocs.io/en/latest/) for more information.
+
 ## Getting help
+
+To get help for a specific command or subcommand, run `farmer help`:
+
+```
+farmer help deploy
+```
+
+```
+farmer help logdna config
+```
 
 For bugs or feature requests related to Farmer itself, please open a [GitHub issue](https://github.com/vmfarms/farmer/issues/new).
 
