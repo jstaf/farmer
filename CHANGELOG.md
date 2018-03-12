@@ -1,6 +1,6 @@
 # farmer change log
 
-## Unreleased
+## 2.4.0 (2018-03-12)
 
 ### Added
 
