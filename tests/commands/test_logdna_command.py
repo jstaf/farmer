@@ -88,11 +88,13 @@ class TestLogDNAExportCommand(object):
         """
         self.mocked_config.get.return_value = None
         mocked_prompt_logdna_service_key = mocker.patch('farmer.commands.logdna.prompt_logdna_service_key')
-        mocked_prompt_logdna_service_key.return_value = None
+        mocked_prompt_logdna_service_key.return_value = 'a new key'
+        mocked_sh = mocker.patch('farmer.commands.logdna.sh')
 
         result = self.click_cli_runner.invoke(logdna.export)
 
         mocked_prompt_logdna_service_key.assert_called_once_with()
+        mocked_sh.farmer.config.set.assert_called_once_with('logdna_service_key', 'a new key')
         self.logdna_client.export.assert_called_once()
         assert result.exit_code == 0
         assert not result.exception

@@ -119,6 +119,7 @@ def export(ctx, from_datetime, to_datetime, size, hosts, apps, levels, query, pr
     logdna_service_key = user_config.get(user_config, 'logdna_service_key')
     if not logdna_service_key:
         logdna_service_key = prompt_logdna_service_key()
+        sh.farmer.config.set('logdna_service_key', logdna_service_key)
 
     logdna = LogDNAClient(logdna_service_key)
     try:
