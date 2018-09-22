@@ -1,5 +1,9 @@
 # farmer change log
 
+## 2.4.1 (2018-09-20)
+
+* Fixed installation issues on Python 3.7. 
+
 ## 2.4.0 (2018-03-12)
 
 ### Added
