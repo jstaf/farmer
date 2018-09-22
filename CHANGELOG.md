@@ -1,8 +1,9 @@
 # farmer change log
 
-## 2.4.1 (2018-09-20)
+## 2.4.1 (unreleased)
 
-* Fixed installation issues on Python 3.7. 
+* `farmer` can now be installed on Python 3.7 without errors. 
+* Fixed six versioning issue that caused host list issues on Linux for some commands.
 
 ## 2.4.0 (2018-03-12)
 
